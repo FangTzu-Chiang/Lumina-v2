@@ -1,0 +1,588 @@
+body {
+    /* height: 5000px; */
+    overflow-x: hidden;
+}
+
+
+:root {
+    --color1: #34473F;
+    --color2: #E2DBD1;
+    --color3: #BC6537;
+    --transition-speed: 0.3s;
+}
+
+::selection {
+    color: white;
+    background: #BC6537;
+}
+
+.section-hero {
+    /* 全屏顯示 */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Ensure the section takes full viewport height */
+    text-align: center; /* Center text inside the h1 */
+    /* background-image: url('your-image.jpg'); */
+    background-size: cover;
+    background-position: center;
+}
+.footer-hero {
+    background-color: #E2DBD1;
+    color: #34473F;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.section-content {
+    background-color: #E2DBD1;
+    color: #34473F;
+    padding: 185px 0;
+}
+
+.section-content2 {
+    background-color: #2e5141;
+    padding: 185px 0;
+    color: #e2dbd1;
+}
+
+.section-content3 {
+    background-color: #2e5141;
+    padding: 80px 0;
+    color: #e2dbd1;
+}
+
+/* 文字樣式能否修統一 */
+.hero-text {
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    margin: 0;
+    text-align: center;
+    font-size: 3rem;
+    font-weight: bold;
+    position: absolute;
+    top: 50%; /* Position at 50% from the top */
+    left: 50%; /* Position at 50% from the left */
+    transform: translate(-50%, -50%); /* Centering trick */
+    z-index: 1; /* Ensure it's above the background image */
+}
+
+.footer-text {
+    text-align: center;
+}
+
+
+.cardTitle h1{
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-size: 3rem;
+}
+
+.content-text {
+    text-align: center;
+    font-size: 1.3rem;
+    padding: 20px;
+}
+
+.container{
+    min-height: 100vh;
+}
+
+
+
+.nav-logo{
+    font-family: "Playfair Display", serif;
+    /* font-optical-sizing: auto; */
+    font-weight: 400;
+    font-size: 25px;
+    padding: 20px;
+    color: var(--color1);
+}
+
+.nav-logo a{
+    visibility: hidden;
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    padding: 5px 0;
+    align-items: center;
+    justify-content: center;
+}
+.nav-logo a:hover{
+    text-decoration: none;
+}
+
+
+.bg-video {
+    height: 100vh;
+    width: 100vw;
+    object-fit: cover;
+    filter: brightness(0.8);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -5;
+}
+
+.bg-img {
+    height: 100vh;
+    width: 100vw;
+    object-fit: cover;
+    filter: brightness(0.8);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -8;
+}
+/* logo */
+.logo-container {
+    overflow: hidden; /* 防止内容超出容器 */
+    white-space: nowrap;
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    margin: 0;
+    text-align: center;
+    font-size: 3rem;
+    font-weight: bold;
+    position: absolute;
+    top: 50%; /* Position at 50% from the top */
+    left: 50%; /* Position at 50% from the left */
+    transform: translate(-50%, -50%); /* Centering trick */
+    z-index: 20;
+}
+
+.logo {
+    /* font-size: 48px; */
+    /* font-weight: bold; */
+    color: #E2DBD1;
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-size: 4rem;
+    display: inline-block;
+    opacity: 0;
+    transform: scaleX(0); /* 初始状态下缩小 */
+    letter-spacing: 0; /* 初始字距 */
+    animation: expand 6.5s ease forwards;
+    z-index: 20;
+}
+
+
+
+
+@keyframes expand {
+    0% {
+
+        transform: scaleX(0.65); /* 从水平方向缩小 */
+        letter-spacing: normal; /* 原始字距 */
+        
+    }
+
+    50% {
+        opacity: 0.5; /* 逐渐显现 */
+    }
+    
+    100% {
+        transform: scaleX(1); /* 展开到原始大小 */
+        letter-spacing: 0.3em; /* 字距扩展到4倍（0.25em） */
+        opacity: 1;
+    }
+}
+
+.logo1 {
+    text-align: left;
+    padding: 20px 0;
+    z-index: 20;
+}
+
+.logo1 img{
+    width: 40%;
+}
+
+
+
+.image-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-wrapper img {
+    border-radius: 20px;
+    max-width: 100%;
+    height: auto;
+}
+
+.image-wrapper video {
+    border-radius: 20px;
+    max-width: 100%;
+    height: auto;
+}
+
+
+.content-wrapper {
+    padding: 30px;
+}
+
+/* 卡片樣式 */
+
+.card {
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+    border-radius: 20px;
+    /* 圓角 */
+    box-shadow: 0 0 20px rgba(51, 70, 80, 0.5);
+    /* 外陰影 */
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0) linear-gradient(to bottom, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.7) 80%);
+    /* 圖片的灰階半透明漸層遮罩 */
+    z-index: 0;
+    /* z軸的位置 */
+}
+
+a.link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    /* z軸的位置 */
+}
+
+.img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 3s ease;
+    position: relative;
+    z-index: -1;
+    /* z軸的位置 */
+}
+
+.info {
+    position: absolute;
+    width: calc(100% - 40px);
+    /* 扣除間距，讓資訊保持水平滿版 */
+    bottom: 0;
+    /* 靠下對齊 */
+    padding: 20px;
+    color: #ffffff;
+    transition: background-color 1.5s ease;
+}
+
+h2.title {
+    transition: color 1s ease;
+    margin-bottom: 12px;
+}
+
+.detail {
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 1.5s ease, opacity 1s ease;
+}
+
+
+/*card hover  */
+.card:hover .img {
+    transform: scale(1.2);
+}
+
+.card:hover .info {
+    background-color: rgba(176, 134, 98, 0.6);
+}
+
+.card:hover .detail {
+    max-height: 90px;
+    opacity: 1;
+}
+
+
+
+
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #efede7;
+}
+
+.footer-text ul {
+    padding: 0;
+}
+
+.footer-text li {
+    list-style: none;
+    text-align: left;
+    font-size: 1.2rem;
+    padding: 15px 15px;
+
+}
+
+.footerTitle h1 {
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-size: 4rem;
+}
+
+
+.footersecondTitle h1 {
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    text-align: left;
+    font-weight: 400;
+    font-size: 4rem;
+    padding-left: 15px;
+}
+
+/* form樣式 */
+.contact-container {
+    display: flex;
+    align-items: left;
+    /* justify-content: space-evenly; */
+}
+
+.contact-right {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    text-align: left;
+    gap: 20px;
+    padding: 15px;
+}
+
+.contact-inputs {
+    width: 400px;
+    height: 50px;
+    border: none;
+    outline: none;
+    padding-left: 25px;
+    /* font-weight: 500; */
+    color: #666;
+    border-radius: 50px;
+}
+
+
+.contact-inputs:focus {
+    border: 2px solid #D4AB87;
+}
+
+.contact-inputs::placeholder {
+    color: #a9a9a9;
+}
+
+.contact-right button {
+    display: flex;
+    align-items: center;
+    padding: 12px 24px;
+    font-size: 16px;
+    color: #fff;
+    gap: 10px;
+    border: none;
+    border-radius: 50px;
+    background-color: #6A7E6D;
+    cursor: pointer;
+    transition-duration: 0.4s;
+}
+
+.contact-right button:hover {
+    background-color: #D49F68;
+}
+
+
+/* navbar */
+.nav-bar {
+    max-width: 1200px;
+    width: 95%;
+    background-color: var(--color2);
+    margin: 20px auto;
+    padding: 10px 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 99;
+}
+
+.logo img {
+    width: 50px;
+    height: auto;
+}
+/* menu */
+.menu {
+    display: flex;
+    gap: 30px;
+}
+
+.menu li {
+    list-style: none;
+}
+
+.menu li a {
+    font-family: "Poppins", sans-serif;
+    text-decoration: none;
+    color: var(--color1);
+    text-transform: uppercase;
+    font-weight: 500;
+    position: relative;
+    padding: 5px 0;
+    transition: color var(--transition-speed);
+}
+
+.menu li a b{
+    cursor: none;
+}
+
+.menu li a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 0;
+    height: 2px;
+    background-color: var(--color1);
+    transition: width var(--transition-speed);
+}
+
+.menu li a:hover {
+    color: var(--color1);
+}
+
+.menu li a:hover::after {
+    width: 100%;
+}
+
+/* 菜单按钮样式 */
+.menu-icon {
+    display: none;
+    font-size: 1.8rem;
+    color: var(--color1);
+    cursor: pointer;
+}
+.menu li {
+    margin: 15px 0;
+    }
+    
+.menu-icon {
+    display: none;
+}
+
+/* 响应式样式 */
+/* Updated CSS for mobile view */
+@media (max-width: 1000px) {
+    .menu {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        background-color: var(--color2);
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height var(--transition-speed);
+        display: none; /* Default to hidden */
+    }
+
+    .menu-icon {
+        display: block;
+    }
+
+    /* When the checkbox is checked, the menu should appear */
+    #menu-toggle:checked ~ .menu {
+        max-height: 500px;
+        display: flex; /* Ensure the menu is displayed */
+    }
+}
+
+
+
+
+/* 复选框控制菜单展开 */
+#menu-toggle:checked ~ .menu {
+max-height: 500px;
+display: flex; /* 菜单展开时显示 */
+}
+
+
+
+.toTop:hover {
+    color: #D49F68;
+    bottom: 32px;
+    pointer-events: auto;
+    opacity: 1;
+}
+
+.toTop.active {
+    bottom: 32px;
+    pointer-events: auto;
+    opacity: 1;
+}
+
+
+
+.toTop {
+    background-color: rgba(228, 228, 228, 0.249);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    bottom: 16px;
+    right: 32px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    color: white;
+    text-decoration: none;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.4s;
+    z-index: 99;
+}    
+
+.toTop:hover {
+    color: #D49F68;
+    bottom: 32px;
+    pointer-events: auto;
+    opacity: 1;
+}    
+
+.toTop.active {
+    bottom: 32px;
+    pointer-events: auto;
+    opacity: 1;
+}    
+
+
+@media (min-width: 576px) {
+    .dropdown:hover>.dropdown-menu {
+        display: block;
+        margin-top: 0;
+    }
+
+
+}
