@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- font -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&display=swap');
+    </style>
+    <!-- favicon -->
+    <link rel="icon" type="image/x-icon" href="./img/favicon.ico">
+    <link rel="stylesheet" href="./css/booking.css">
+
+</head>
+
+<body>
+    <!-- <section class="section-hero">
+        <div>
+            <img class="bg-img" src="./img/index-bg.jpg" alt="bgimg">
+        </div>
+    </section> -->
+
+    <!-- Weekly Calendar Navigation -->
+    <section class="calendar-navigation my-4">
+        <div class="container">
+            <div class="title">
+                <p>
+                <a href="index_login.html"><img src="./img/logo-02.png" alt="logo" width="140px"></a>
+                <h3>Booking System</h3></p>
+                <br>
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+                <button class="btn btn-light" id="prevWeek">&lt;</button>
+                <div id="currentWeek" class="text-center">
+                    <span id="currentMonth">September</span>
+                    <span id="currentYear">2024</span>
+                </div>
+                <button class="btn btn-light" id="nextWeek">&gt;</button>
+            </div>
+
+            <div class="d-flex justify-content-around mt-3">
+                <div class="date-wrapper">
+                    <div>Sun</div>
+                    <div class="datePointer"><span>1</span></div>
+                </div>
+                <div class="date-wrapper">
+                    <div>Mon</div>
+                    <div class="datePointer"><span id="dayMon">2</span></div>
+                </div>
+                <div class="date-wrapper">
+                    <div>Tue</div>
+                    <div class="datePointer"><span id="dayTue">3</span></div>
+                </div>
+                <div class="date-wrapper">
+                    <div>Wed</div>
+                    <div class="datePointer"><span id="dayWed">4</span></div>
+                </div>
+                <div class="date-wrapper">
+                    <div>Thu</div>
+                    <div class="datePointer"><span id="dayThu">5</span></div>
+                </div>
+                <div class="date-wrapper">
+                    <div>Fri</div>
+                    <div class="datePointer"><span id="dayFri">6</span></div>
+                </div>
+                <div class="date-wrapper">
+                    <div>Sat</div>
+                    <div class="datePointer"><span id="daySat">7</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Class Listing Section -->
+    <section class="class-listing my-4">
+        <div class="container">
+            <div class="class-card p-3 mb-4">
+                <div class="d-flex justify-content-between">
+                    <div class="content">
+                        <h4>哈達瑜珈</h4>
+                        <p><img src="./img/teacher01.png">Peggy</p>
+                        <p><i class="fa-regular fa-calendar-days"></i> <span id="classDate">9/2</span> 10:00 - 11:00</p>
+
+                    </div>
+                    <div class="text-end">
+                        <button class="btn btn-success">報名</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Structure -->
+    <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="bookingModalLabel">報名課程</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="bookingForm">
+                        <div class="mb-3">
+                            <label for="courseName" class="form-label">課程名稱</label>
+                            <input type="text" class="form-control" id="courseName" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="numberOfParticipants" class="form-label">參加人數</label>
+                            <input type="number" class="form-control" id="numberOfParticipants" min="1" max="8"
+                                value="1">
+                        </div>
+                        <button type="submit" class="btn btn-warning" id="">送出報名</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="successToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto">報名狀態</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                報名成功！
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let startDate = new Date('2024-09-01'); // 設置初始日期為2024年9月1日（星期日）
+        let currentStartDate = new Date(startDate);
+
+
+        // 模擬的課程數據
+        const courses = [
+            { date: '2024-09-01', name: '雕塑瑜珈', instructor: 'Stella', time: '15:00 - 16:00', isFull: true },
+            { date: '2024-09-02', name: '哈達瑜珈', instructor: 'Peggy', time: '10:00 - 11:00', isFull: false },
+            { date: '2024-09-02', name: '雕塑瑜珈', instructor: 'Stella', time: '14:00 - 15:00', isFull: true },
+            { date: '2024-09-02', name: '八肢瑜珈', instructor: 'Vicky', time: '15:00 - 16:00', isFull: false },
+            // 可以繼續添加其他日期的課程
+            { date: '2024-09-03', name: '流動瑜珈', instructor: 'Stella', time: '10:00 - 11:00', isFull: true },
+            { date: '2024-09-03', name: '伸展瑜珈', instructor: 'Zenda', time: '14:00 - 15:00', isFull: false },
+            { date: '2024-09-03', name: '哈達瑜珈', instructor: 'Peggy', time: '18:00 - 19:00', isFull: false },
+            // 0904
+            { date: '2024-09-04', name: '八肢瑜珈', instructor: 'Vicky', time: '14:00 - 15:00', isFull: false },
+            { date: '2024-09-04', name: '伸展瑜珈', instructor: 'Stella', time: '19:00 - 20:00', isFull: true },
+            // 0906
+            { date: '2024-09-06', name: '伸展瑜珈', instructor: 'Zenda', time: '18:00 - 19:00', isFull: true },
+            // 0907
+            { date: '2024-09-07', name: '八肢瑜珈', instructor: 'Peggy', time: '10:00 - 11:00', isFull: false },
+            { date: '2024-09-07', name: '雕塑瑜珈', instructor: 'Vicky', time: '14:00 - 15:00', isFull: true },
+            { date: '2024-09-07', name: '八肢瑜珈', instructor: 'Zenda', time: '15:00 - 16:00', isFull: false },
+            // 0909
+            { date: '2024-09-09', name: '流動瑜珈', instructor: 'Peggy', time: '15:00 - 16:00', isFull: false },
+            { date: '2024-09-09', name: '雕塑瑜珈', instructor: 'Vicky', time: '18:00 - 19:00', isFull: true },
+            // 0910
+            { date: '2024-09-10', name: '流動瑜珈', instructor: 'Stella', time: '10:00 - 11:00', isFull: true },
+            // 0911
+            { date: '2024-09-11', name: '伸展瑜珈', instructor: 'Zenda', time: '14:00 - 15:00', isFull: false },
+            { date: '2024-09-11', name: '哈達瑜珈', instructor: 'Peggy', time: '18:00 - 19:00', isFull: false },
+        ];
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const bookingModal = new bootstrap.Modal(document.getElementById('bookingModal'));
+            const courseNameInput = document.getElementById('courseName');
+
+            // 更新日曆和課程
+            function updateCalendar() {
+                const days = document.querySelectorAll('.calendar-navigation .date-wrapper');
+
+                // 循環處理一周中的每一天（星期日到星期六）
+                days.forEach((day, index) => {
+                    const date = new Date(currentStartDate);
+                    date.setDate(currentStartDate.getDate() + index); // 根據每一天的日期進行調整
+
+                    const daySpan = day.querySelector('span');
+                    daySpan.textContent = date.getDate(); // 顯示日期
+
+                    // 將完整日期存儲在數據屬性中，以供篩選使用
+                    const formattedDate = date.toISOString().split('T')[0]; // 格式化為 YYYY-MM-DD
+                    day.setAttribute('data-full-date', formattedDate); // 存儲完整日期
+
+                    day.addEventListener('click', () => {
+                        // 移除所有日期的活動樣式
+                        days.forEach(wrapper => {
+                            wrapper.classList.remove('active');
+                        });
+
+                        // 為當前點擊的日期添加活動樣式
+                        day.classList.add('active');
+
+                        // 過濾並顯示當天課程
+                        filterCoursesByDate(formattedDate);
+                    });
+                });
+                // 更新月份和年份顯示
+                document.getElementById('currentMonth').textContent = currentStartDate.toLocaleString('default', { month: 'long' });
+                document.getElementById('currentYear').textContent = currentStartDate.getFullYear();
+            }
+
+            // 根據日期過濾課程
+            function filterCoursesByDate(selectedDate) {
+                const courseContainer = document.querySelector('.class-listing .container');
+                courseContainer.innerHTML = ''; // 清空現有課程
+
+                const filteredCourses = courses.filter(course => course.date === selectedDate);
+
+                if (filteredCourses.length > 0) {
+                    filteredCourses.forEach(course => {
+                        const courseCard = document.createElement('div');
+                        courseCard.classList.add('class-card', 'p-3', 'mb-4');
+                        courseCard.innerHTML = `
+                <div class="d-flex justify-content-between">
+                    <div class="content">
+                        <h4>${course.name}</h4>
+                        <p><img src="./img/teacher01.png">${course.instructor}</p>
+                        <p><i class="fa-regular fa-calendar-days"></i> ${course.date} ${course.time}</p>
+                    </div>
+                    <div class="text-end">
+                        <button class="btn ${course.isFull ? 'btn-secondary disabled' : 'btn-success'}">
+                            ${course.isFull ? '額滿' : '報名'}
+                        </button>
+                    </div>
+                </div>
+            `;
+                        courseContainer.appendChild(courseCard);
+                    });
+                    // 绑定事件到新生成的按钮
+                    bindBookingButtons();
+                } else {
+                    courseContainer.innerHTML = '<p>當天沒有課程。</p>';
+                }
+            }
+            // 绑定事件到课程卡片的生成中，以确保动态生成的元素也能触发事件
+            function bindBookingButtons() {
+                document.querySelectorAll('.btn-success').forEach(button => {
+                    button.addEventListener('click', function () {
+                        const courseCard = this.closest('.class-card');
+                        const courseName = courseCard.querySelector('h4').textContent;
+
+                        // 将课程名称设置到Modal中的输入框
+                        courseNameInput.value = courseName;
+
+                        // 显示Modal
+                        bookingModal.show();
+                    });
+                });
+            }
+
+            // 绑定表单提交事件
+            document.getElementById('bookingForm').addEventListener('submit', function (event) {
+                event.preventDefault(); // 防止表单默认提交导致页面刷新
+
+                // 获取Toast元素
+                const toastEl = document.getElementById('successToast');
+                const toast = new bootstrap.Toast(toastEl);
+
+                // 更新Toast中的消息
+                toastEl.querySelector('.toast-body').textContent = `預定 ${courseNameInput.value} 成功！參加人數：${document.getElementById('numberOfParticipants').value}`;
+
+                // 显示Toast
+                toast.show();
+
+                // 关闭Modal
+                bookingModal.hide();
+            });
+
+
+            document.getElementById('prevWeek').addEventListener('click', () => {
+                currentStartDate.setDate(currentStartDate.getDate() - 7); // 向前移動一周
+                updateCalendar();
+            });
+
+            document.getElementById('nextWeek').addEventListener('click', () => {
+                currentStartDate.setDate(currentStartDate.getDate() + 7); // 向後移動一周
+                updateCalendar();
+            });
+
+            // 初次調用以顯示9月1日，2024年開始的第一周
+            updateCalendar();
+            filterCoursesByDate(startDate.toISOString().split('T')[0]); // 初始化顯示當天課程
+
+
+        });
+
+    </script>
+
+</body>
+
+</html>
