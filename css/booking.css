@@ -1,0 +1,166 @@
+:root {
+    --color1: #34473F;
+    --color2: #E2DBD1;
+    --color2a: #e8e1d6;
+    --color3: #BC6537;
+    --transition-speed: 0.3s;
+}
+
+::selection {
+    color: white;
+    background: #BC6537;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--color2);
+}
+
+.container {
+    max-width: 610px;
+}
+
+.title h3 {
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-size: 2rem;
+    color: var(--color1);
+    /* text-align: right; */
+}
+
+
+.calendar-navigation {
+    background-color: var(--color2);
+    padding: 20px 0;
+}
+
+.calendar-navigation #currentWeek {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.calendar-navigation div {
+    font-size: 1rem;
+}
+
+.class-card {
+    color: var(--color1);
+    background-color: var(--color2a);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.class-card h5 {
+    color: var(--color1);
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+}
+
+.class-card p {
+    color: var(--color1);
+    margin: 12px 0;
+}
+
+.text-end {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text-end button {
+    background-color: #6A7E6D;
+    !important
+}
+
+.class-card img {
+    width: 40px;
+    height: 40px;
+    margin-right: 1rem;
+    border-radius: 50%;
+}
+
+.date-wrapper {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.datePointer {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.date-wrapper div {
+    margin-bottom: 5px;
+    /* 可根据需要调整 */
+}
+
+
+.date-wrapper.active .datePointer {
+    position: relative;
+    color: white;
+    background-color: #6A7E6D;
+    /* 圆形的背景颜色 */
+    border-radius: 50%;
+    padding: 10px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.date-wrapper.active .datePointer::after {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 10px;
+    background-color: #6A7E6D;
+    /* 圆点的颜色 */
+    border-radius: 50%;
+    margin-top: 5px;
+}
+
+.modal-header {
+    background-color: #6A7E6D;
+    color: white;
+}
+
+.modal-content {
+    border-radius: 8px;
+}
+
+.btn-light,
+.btn-light:hover,
+.btn-light:focus,
+.btn-light:active {
+    color: var(--color1);
+    !important;
+    background-color: #E2DBD1 !important;
+    border-color: #E2DBD1 !important;
+}
+
+.btn-warning,
+.btn-warning:hover,
+.btn-warning:focus,
+.btn-warning:active {
+    color: #fff;
+    !important;
+    background-color: #D49F68 !important;
+    border-color: #D49F68 !important;
+}
+
+.bg-img {
+    height: 100vh;
+    width: 100vw;
+    object-fit: cover;
+    filter: brightness(0.8);
+    opacity: 0.2;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -8;
+}
